@@ -6,20 +6,36 @@ import Chip from '@material-ui/core/Chip';
 
 const useStyles = makeStyles(theme => ({
     chatMessage:{
-        display: 'flex',
+        float: 'left',
+        width: '80%',
         alignItems: 'center',
-        border: '1px solid purple',
+        border: '2px solid #00aabb',
         margin: '10px',
+        border_radius: '.0em',
+        background: '#00aabb',
     },
     chatMessageMe:{
-        display: 'flex',
+        float: 'right',
+        width: '80%',
         alignItems: 'center',
         border: '2px solid black',
         margin: '10px',
+        border_radius: '.0em',
+        background: '#00aabb',
     },
     chip: {
         color: colorProps => colorProps.color,
-    }
+        float: 'left',
+    },
+    message: {
+        //float: 'left',
+        textAlign: 'left',
+    },
+    date: {
+        //float: 'left',
+        marginTop: '8px',
+        textAlign: 'left',
+    },
 }));
 
 export default function UserStatusEntry(props){
@@ -27,23 +43,16 @@ export default function UserStatusEntry(props){
     const colorProps = {color: props.chat.color};
 
     const classes = useStyles(colorProps);
+    let cl = classes.chatMessage;
     if(props.isUser){
-        return(
-            <div className={classes.chatMessageMe}>
-                <Chip label={props.chat.from + '' + props.chat.accountID} className={`${classes.chip}`} />
-                <Typography variant='body1' gutterBottom>{props.chat.msg}</Typography>
-                <Typography variant='body1' gutterBottom>{props.chat.date}</Typography>
-            </div>
-        )
+        cl = classes.chatMessageMe;
     }
-    else{
-        return(
-            <div className={classes.chatMessage}>
-                <Chip label={props.chat.from + '' + props.chat.accountID} className={classes.chip} />
-                <Typography variant='body1' gutterBottom>{props.chat.msg}</Typography>
-                <Typography variant='body1' gutterBottom>{props.chat.date}</Typography>
-            </div>
-        )
-    }
-    
+
+    return(
+        <div className={cl}>
+            <Chip label={props.chat.from} className={classes.chip} />
+            <Typography variant='body1' gutterBottom className={classes.message}>{props.chat.msg}</Typography>
+            <Typography variant='body1' gutterBottom className={classes.date}>{props.chat.date}</Typography>
+        </div>
+    )
 }

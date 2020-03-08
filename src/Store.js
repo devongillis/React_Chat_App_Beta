@@ -234,7 +234,7 @@ export default function Store(props){
         socket.on('comand is an error', function(msg){
             alert('comand is an error, command formats are:\n' +
             '/nick <"your new user name">\n' +
-            '/nickcolor "your six digit hexidecimal color"');
+            '/nickcolor "your six digit hexidecimal color without hash tag"');
         });
         socket.on('chat message', function(msg){
             //dispatch({type: 'REMOVE_MESSAGES', payload: msg});

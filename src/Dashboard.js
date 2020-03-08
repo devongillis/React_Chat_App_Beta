@@ -2,17 +2,13 @@ import React from 'react'
 import Paper from '@material-ui/core/Paper';
 import { Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
-import Chip from '@material-ui/core/Chip';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import ScrollToBottom from 'react-scroll-to-bottom';
 
 import {CTX} from './Store';
-import ButtonImageRed from './images/red.png';
-import ButtonImageGreen from './images/green.png';
 import UserStatusEntry from './components/UserStatusEntry/UserStatusEntry';
 import UserMessage from './components/Messages/UserMessage';
 
@@ -22,48 +18,40 @@ const useStyles = makeStyles(theme => ({
     root: {
         margin: '50px',
         padding: theme.spacing(3, 2),
-        border: '1px solid blue',
+        //border: '1px solid #ffaaaa',
+        background: '#aaaaff',
     },
     flex: {
         display: 'flex',
         alignItems: 'center',
-        border: '1px solid red',
+        //border: '1px solid red',
     },
     topicsWindow: {
         width: '20%',
         height: '300px',
-        border: '1px solid green',
+        //border: '1px solid #8888ff',
+        background: '#57ffdd',
     },
     usersWindow: {
         width: '20%',
         height: '300px',
-        border: '1px solid orange',
+        //border: '1px solid orange',
+        background: '#a6fffb',
     },
     chatWindow: {
         width: '60%',
         height: '300px',
-        border: '1px solid cyan',
-        background_color: 'transparent',
-    },
-    chatMessage:{
-        display: 'flex',
-        alignItems: 'center',
-        border: '1px solid purple',
-        margin: '10px',
-    },
-    chatMessageMe:{
-        display: 'flex',
-        alignItems: 'center',
-        border: '2px solid black',
-        margin: '10px',
+        //border: '1px solid lightBlue',
+        background: 'lightBlue',
     },
     chatBox: {
         width: '100%',
-        border: '1px solid pink',
+        //border: '1px solid pink',
+        background: '#ffffff',
     },
     button: {
         width: '15%',
-        border: '1px solid yellow',
+        //border: '1px solid yellow',
     },
     block: {
         height: '90%',
@@ -77,14 +65,11 @@ export default function Dashboard() {
     // CTX store
     const {allChats, sendChatAction, getUserName, userStats, getAllChats, userName} = React.useContext(CTX); // all chats now refers to the state of Store.js
 
-    //console.log({allChats});
-
     const topics = Object.keys(allChats);
 
     // local state
     const [activeTopic, changeActiveTopic] = React.useState(topics[0]); // default to the first topic in the Store
     const [textValue, changeTextValue] = React.useState('');
-    //const [name, changeName] = React.useState('devon');
 
     return (
         <div>
@@ -109,25 +94,16 @@ export default function Dashboard() {
                         }
                     </ScrollToBottom>
                     <ScrollToBottom className={classes.chatWindow}>
-                        <div className={classes.block}>
-
-                        </div>
+                        <div className={classes.block}></div>
                         {
                             allChats[activeTopic].map((chat, i) => {
-                                //let color = 'color: ' + chat.color;
-                                if(i === 0){
-                                    //alert(userName.accountID1[0].accountID2);
-                                }
+                                let isUser = false;
                                 if(chat.accountID === userName.accountID1[0].accountID2){
-                                    return (
-                                        <UserMessage className={classes.chatMessageMe} key={i} chat={chat} isUser={true}/>
-                                    )
+                                    isUser = true;
                                 }
-                                else{
-                                    return (
-                                        <UserMessage className={classes.chatMessage} key={i} chat={chat} isUser={false}/>
-                                    )
-                                }
+                                return (
+                                    <UserMessage key={i} chat={chat} isUser={isUser}/>
+                                )
                             })
                         }
                     </ScrollToBottom>

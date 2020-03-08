@@ -52,7 +52,7 @@ export default function UserStatusEntry(props){
                     <img src={b} className={classes.UserStatusEntry_image}></img>
                 </div>
                 <div className={classes.UserStatusEntry_text_div}>
-                    <p className={classes.UserStatusEntry_text}>{props.status.username + props.status.accountID}</p>
+                    <p className={classes.UserStatusEntry_text}>{props.status.username}</p>
                 </div>
             </div>
         </div>

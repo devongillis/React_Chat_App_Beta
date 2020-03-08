@@ -360,7 +360,9 @@ io.on('connection', function(socket){
         // update our client list
         // set user logged in to false, now his username is up for grabs
         let user = allUsersEver.find(x => x.socketID === socket.id);
-        user.loggedIn = false;
+        if(user !== undefined){
+            user.loggedIn = false;
+        }
         io.emit('active users', JSON.stringify(allUsersEver));
         console.log('user disconnected', JSON.stringify(user));
     });
