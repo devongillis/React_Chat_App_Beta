@@ -260,6 +260,9 @@ export default function Store(props){
                 new_dispatch({type: 'RECEIVE_STATUS', payload: {username: user.username, loggedIn: user.loggedIn, states: 'states', accountID: user.accountID}});
             }
         });
+        socket.on('color updated', function(msg){
+            alert('color updated');
+        });
     }
 
     return (

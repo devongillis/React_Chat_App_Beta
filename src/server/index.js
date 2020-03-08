@@ -2,7 +2,7 @@ let app = require('express')();
 let http = require('http').createServer(app);
 let io = require('socket.io')(http);
 
-let defaultColor = '#ffff00';
+let defaultColor = '#000000';
 
 let messages = [
     /*
@@ -338,6 +338,7 @@ io.on('connection', function(socket){
                     let color = '#' + response.result;
                     user.color = color;
                     console.log(color);
+                    socket.emit('color updated', null);
                 }
             }
             else{
